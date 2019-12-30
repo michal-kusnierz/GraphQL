@@ -9,4 +9,9 @@ const client = new Client({
   exchanges: defaultExchanges
 });
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <Provider value={client}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
