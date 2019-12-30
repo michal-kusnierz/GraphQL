@@ -6,18 +6,28 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          1. get to know GraphQL
         </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="https://graphql.org"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn GraphQL
         </a>
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>2. maybe use Prisma...?</p>
+        <a
+          className="App-link"
+          href="https://www.prisma.io/with-graphql"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Get started with GraphQL & Prisma
+        </a>
+
       </header>
     </div>
   );
