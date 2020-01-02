@@ -1,8 +1,13 @@
 # GraphQL
 ## an introduction
-Navigate into `server` directory and run with: `yarn start` 
 
-server is running on http://localhost:4000
+run with: `yarn start` 
+
+----------
+
+to run GraphQL Playground navigate into `server` directory and run with: `yarn start` 
+
+→ server is running on http://localhost:4000
 
 ----------
 
