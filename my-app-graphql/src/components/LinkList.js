@@ -16,19 +16,6 @@ const FEED_QUERY = gql`
   }
 `
 
-const linksToRender = [
-  {
-    id: '1',
-    description: 'Prisma turns your database into a GraphQL API 😎',
-    url: 'https://www.prismagraphql.com',
-  },
-  {
-    id: '2',
-    description: 'The best GraphQL client',
-    url: 'https://formidable.com/open-source/urql/',
-  },
-]
-
 const LinkList = () => {
   useQuery({ query: FEED_QUERY });
 
