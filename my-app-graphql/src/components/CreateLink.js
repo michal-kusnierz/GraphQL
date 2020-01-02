@@ -51,7 +51,10 @@ const CreateLink = props => {
           placeholder="The URL for the link"
         />
       </div>
-      <button onClick={submit}>
+      <button 
+        disabled={state.fetching}
+        onClick={submit}
+      >
         Submit
       </button>
     </div>
