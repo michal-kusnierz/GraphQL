@@ -1,5 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
+import { useMutation } from 'urql'
 
 const POST_MUTATION = gql`
   mutation PostMutation($description: String!, $url: String!) {
@@ -26,10 +27,12 @@ const CreateLink = props => {
   const [description, setDescription] = React.useState('')
   const [url, setUrl] = React.useState('')
   
-  const submit = React.useCallback(() => {
-    // ... you'll implement this 🔜
-  }, [])
+  const [state, executeMutation] = useMutation(POST_MUTATION)
 
+  const submit = React.useCallback(() => {
+      executeMutation({ url, description })
+  }, [executeMutation, url, description])
+  
   return (
     <div>
       <div className="flex flex-column mt3">
