@@ -1,4 +1,26 @@
 import React from 'react'
+import gql from 'graphql-tag'
+
+const POST_MUTATION = gql`
+  mutation PostMutation($description: String!, $url: String!) {
+    post(description: $description, url: $url) {
+      id
+      createdAt
+      url
+      description
+      postedBy {
+        id
+        name
+      }
+      votes {
+        id
+        user {
+          id
+        }
+      }
+    }
+  }
+`
 
 const CreateLink = props => {
   const [description, setDescription] = React.useState('')
