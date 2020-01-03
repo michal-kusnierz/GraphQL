@@ -73,12 +73,15 @@ const Login = props => {
         <button
           type="button"
           className="pointer mr2 button"
+          disabled={state.fetching}
+          onClick={mutate}
         >
           {isLogin ? "login" : "create account"}
         </button>
         <button
           type="button"
           className="pointer button"
+          disabled={state.fetching}
           onClick={() => setIsLogin(!isLogin)}
         >
           {isLogin ? 'need to create an account?' : 'already have an account?'}
