@@ -27,6 +27,21 @@ const Login = props => {
   const [password, setPassword] = React.useState('')
   const [name, setName] = React.useState('')
   
+  const [state, executeMutation] = useMutation(
+    isLogin ? LOGIN_MUTATION : SIGNUP_MUTATION
+  );
+
+  const mutate = React.useCallback(() => {
+    executeMutation({ email, password, name })
+      .then(({ data }) => {
+        const token = data && data[isLogin ? 'login' : 'signup'].token
+        if (token) {
+          setToken(token)
+          props.history.push('/')
+        }
+      });
+  }, [executeMutation, props.history, isLogin, email, password, name]);
+
   return (
     <div>
       <h4 className="mv3">{isLogin ? 'Login' : 'Sign Up'}</h4>
