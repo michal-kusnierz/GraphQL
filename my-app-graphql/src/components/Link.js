@@ -22,7 +22,7 @@ const VOTE_MUTATION = gql`
 
 const Link = ({ index, link }) => {
   const isLoggedIn = !!getToken()
-  
+  const [state, executeMutation] = useMutation(VOTE_MUTATION);
   const upvote = React.useCallback(() => {}, [])
   
   return (
