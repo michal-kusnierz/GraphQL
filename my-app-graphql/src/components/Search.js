@@ -35,7 +35,10 @@ const Search = () => {
     pause: true,
   })
 
-  const search = React.useCallback(() => {}, []);
+  const search = React.useCallback(() => {
+    executeQuery();
+  }, [executeQuery]);
+  
   const links = []
   
   return (
