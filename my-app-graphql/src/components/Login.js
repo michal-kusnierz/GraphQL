@@ -1,7 +1,8 @@
-import React from 'react'
-import gql from 'graphql-tag'
-import { useMutation } from 'urql'
-import { setToken } from '../token'
+import React from 'react';
+import { useMutation } from 'urql';
+import gql from 'graphql-tag';
+
+import { setToken } from '../token';
 
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation($email: String!, $password: String!, $name: String!) {
@@ -9,7 +10,7 @@ const SIGNUP_MUTATION = gql`
       token
     }
   }
-`
+`;
 
 const LOGIN_MUTATION = gql`
   mutation LoginMutation($email: String!, $password: String!) {
@@ -17,17 +18,15 @@ const LOGIN_MUTATION = gql`
       token
     }
   }
-`
+`;
 
 const Login = props => {
+  const [isLogin, setLogin] = React.useState(true);
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [name, setName] = React.useState('');
 
-  const [isLogin, setIsLogin] = React.useState(true)
-
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
-  const [name, setName] = React.useState('')
-  
-  const [state, executeMutation] = useMutation(
+  const [{ fetching }, executeMutation] = useMutation(
     isLogin ? LOGIN_MUTATION : SIGNUP_MUTATION
   );
 
@@ -40,12 +39,11 @@ const Login = props => {
           props.history.push('/')
         }
       });
-  }, [executeMutation, props.history, isLogin, email, password, name]);
+  }, [executeMutation, props.history, email, password, name, isLogin]);
 
   return (
     <div>
-      <h4 className="mv3">{isLogin ? 'Login' : 'Sign Up'}</h4>
-
+      <h4 className="mv3">{isLogin ? "Login" : "Sign Up"}</h4>
       <div className="flex flex-column">
         {!isLogin && (
           <input
@@ -68,27 +66,25 @@ const Login = props => {
           placeholder="Choose a safe password"
         />
       </div>
-
       <div className="flex mt3">
         <button
           type="button"
           className="pointer mr2 button"
-          disabled={state.fetching}
           onClick={mutate}
+          disabled={fetching}
         >
           {isLogin ? "login" : "create account"}
         </button>
         <button
           type="button"
           className="pointer button"
-          disabled={state.fetching}
-          onClick={() => setIsLogin(!isLogin)}
+          onClick={() => setLogin(!isLogin)}
         >
-          {isLogin ? 'need to create an account?' : 'already have an account?'}
+          {isLogin ? "need to create an account?" : "already have an account?"}
         </button>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
