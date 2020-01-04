@@ -1,6 +1,6 @@
 import React from 'react'
 import { getToken } from '../token'
-import { timeDifferenceForDate } from '../dates'
+import { timeDifferenceForDate } from '../date'
 
 const Link = ({ index, link }) => {
   const isLoggedIn = !!getToken()
