@@ -39,7 +39,7 @@ const Search = () => {
     executeQuery();
   }, [executeQuery]);
   
-  const links = []
+  const links = result.data ? result.data.feed.links : [];
   
   return (
     <div>
