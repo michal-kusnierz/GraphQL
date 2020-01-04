@@ -1,6 +1,24 @@
 import React from 'react'
+import gql from 'graphql-tag'
+import { useMutation } from 'urql'
 import { getToken } from '../token'
 import { timeDifferenceForDate } from '../date'
+
+const VOTE_MUTATION = gql`
+  mutation VoteMutation($linkId: ID!) {
+    vote(linkId: $linkId) {
+      link {
+        id
+        votes {
+          id
+          user {
+            id
+          }
+        }
+      }
+    }
+  }
+`
 
 const Link = ({ index, link }) => {
   const isLoggedIn = !!getToken()
