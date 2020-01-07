@@ -44,11 +44,12 @@ const LinkList = props => {
   if (error) return <div>Error</div>
   
   const linksToRender = data.feed.links
+  const pageIndex = isNewPage ? (page - 1) * 10 : 0
 
   return (
     <div>
     {linksToRender.map((link, index) => (
-      <Link key={link.id} link={link} index={index} />
+      <Link key={link.id} link={link} index={pageIndex + index} />
     ))}
     </div>
   )
