@@ -3,7 +3,7 @@ import Link from './Link'
 import { useQuery } from 'urql'
 import gql from 'graphql-tag'
 
-const FEED_QUERY = gql`
+export const FEED_QUERY = gql`
   query FeedQuery($first: Int, $skip: Int, $orderBy: LinkOrderByInput) {
     feed(first: $first, skip: $skip, orderBy: $orderBy) {
       count
