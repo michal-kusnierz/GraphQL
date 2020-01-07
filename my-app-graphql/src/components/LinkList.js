@@ -43,6 +43,27 @@ export const FEED_QUERY = gql`
   }
 `
 
+const NEW_LINKS_SUBSCRIPTION = gql`
+  subscription {
+    newLink {
+      id
+      url
+      description
+      createdAt
+      postedBy {
+        id
+        name
+      }
+      votes {
+        id
+        user {
+          id
+        }
+      }
+    }
+  }
+`
+
 const LinkList = props => {
   const isNewPage = props.location.pathname.includes('new')
   const page = parseInt(props.match.params.page, 10)
