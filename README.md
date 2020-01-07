@@ -17,5 +17,5 @@ to run GraphQL Playground navigate into `server` directory and run with: `yarn s
 
 commands used:
 
-`yarn add urql @urql/exchange-graphcache graphql graphql-tag`
-* for: urql, GraphQL, tagged template literals:
+`yarn add urql @urql/exchange-graphcache graphql graphql-tag subscriptions-transport-ws`
+* for: urql, GraphQL, tagged template literals
