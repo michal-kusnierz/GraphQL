@@ -3,6 +3,22 @@ import Link from './Link'
 import { useQuery, useSubscription } from 'urql'
 import gql from 'graphql-tag'
 
+const NEW_VOTES_SUBSCRIPTION = gql`
+  subscription {
+    newVote {
+      link {
+        id
+        votes {
+          id
+          user {
+            id
+          }
+        }
+      }
+    }
+  }
+`
+
 export const FEED_QUERY = gql`
   query FeedQuery($first: Int, $skip: Int, $orderBy: LinkOrderByInput) {
     feed(first: $first, skip: $skip, orderBy: $orderBy) {
