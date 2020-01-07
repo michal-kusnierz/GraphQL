@@ -27,8 +27,17 @@ export const FEED_QUERY = gql`
   }
 `
 
-const LinkList = () => {
-  const [result] = useQuery({ query: FEED_QUERY })
+const LinkList = props => {
+  const isNewPage = props.location.pathname.includes('new')
+  const page = parseInt(props.match.params.page, 10)
+  
+  const variables = React.useMemo(() => ({
+    skip: isNewPage ? (page - 1) * 10 : 0,
+    first: isNewPage ? 10 : 100,
+    orderBy: isNewPage ? 'createdAt_DESC' : null
+  }), [isNewPage, page])
+
+  const [result] = useQuery({ query: FEED_QUERY, variables })
   const { data, fetching, error } = result
   
   if (fetching) return <div>Fetching</div>
