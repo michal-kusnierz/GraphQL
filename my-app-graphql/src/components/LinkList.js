@@ -55,6 +55,8 @@ const LinkList = props => {
 
   const [result] = useQuery({ query: FEED_QUERY, variables })
   const { data, fetching, error } = result
+ 
+  useSubscription({ query: NEW_VOTES_SUBSCRIPTION })
   
   const linksToRender = React.useMemo(() => {
     if (!data) {
