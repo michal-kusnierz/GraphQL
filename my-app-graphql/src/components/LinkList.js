@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from './Link'
-import { useQuery } from 'urql'
+import { useQuery, useSubscription } from 'urql'
 import gql from 'graphql-tag'
 
 export const FEED_QUERY = gql`
