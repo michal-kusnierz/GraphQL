@@ -46,13 +46,37 @@ const LinkList = props => {
   const linksToRender = data.feed.links
   const pageIndex = isNewPage ? (page - 1) * 10 : 0
 
+  const nextPage = React.useCallback(() => {
+    if (page <= data.feed.count / 10) {
+      props.history.push(`/new/${page + 1}`);
+    }
+  }, [props.history, data.feed.count, page]);
+
+  const previousPage = React.useCallback(() => {
+    if (page > 1) {
+      props.history.push(`/new/${page - 1}`);
+    }
+  }, [props.history, page]);
+
   return (
-    <div>
-    {linksToRender.map((link, index) => (
-      <Link key={link.id} link={link} index={pageIndex + index} />
-    ))}
-    </div>
-  )
+    <React.Fragment>
+      <div>
+        {linksToRender.map((link, index) => (
+          <Link key={link.id} link={link} index={pageIndex + index} />
+        ))}
+      </div>
+      {isNewPage && (
+        <div className="flex ml4 mv3 gray">
+          <div className="pointer mr2" onClick={previousPage}>
+            Previous
+          </div>
+          <div className="pointer" onClick={nextPage}>
+            Next
+          </div>
+        </div>
+      )}
+    </React.Fragment>
+  );
 }
 
 export default LinkList
