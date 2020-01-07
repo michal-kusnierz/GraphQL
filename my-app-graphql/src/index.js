@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import './styles/index.css'
 import App from './components/App'
-import { Provider, Client, dedupExchange, fetchExchange } from 'urql'
+import { Provider, Client, dedupExchange, fetchExchange, subscriptionExchange } from 'urql'
+import { SubscriptionClient } from 'subscription-transport-ws'
 import { cacheExchange } from '@urql/exchange-graphcache'
 import { getToken } from './token'
 import { FEED_QUERY } from './components/LinkList'
@@ -27,6 +28,16 @@ const cache = cacheExchange({
   }
 })
 
+const subscriptionClient = new SubscriptionClient(
+  "ws://localhost:4000",
+  {
+    reconnect: true,
+    connectionParams: {
+      authToken: getToken()
+    }
+  }
+);
+
 const client = new Client({
   url: 'http://localhost:4000',
   fetchOptions: () => {
@@ -35,7 +46,14 @@ const client = new Client({
       headers: { authorization: token ? `Bearer ${token}` : '' }
     }
   },
-  exchanges: [dedupExchange, cache, fetchExchange],
+  exchanges: [
+    dedupExchange, 
+    cache, 
+    fetchExchange,
+    subscriptionExchange({
+      forwardSubscription: operation => subscriptionClient.request(operation)
+    })
+  ],
 })
 
 ReactDOM.render(
