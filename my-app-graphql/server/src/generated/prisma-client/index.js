@@ -20,7 +20,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: ``,
-  secret: `mysecret123`
+  endpoint: `https://eu1.prisma.sh/michal-kusnierz-1bdcac/my-app-graphql/graphql`
 });
 exports.prisma = new exports.Prisma();
